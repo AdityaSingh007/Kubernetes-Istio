@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curl-deployment
+  labels:
+    app: curl-pod
+    environment: production
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curl-pod
+  template:
+    metadata:
+      labels:
+        app: curl-pod
+    spec:
+      containers:
+        - name: curl-container
+          image: curlimages/curl:latest
+          command: ["sleep", "infinity"] # Keeps the container running

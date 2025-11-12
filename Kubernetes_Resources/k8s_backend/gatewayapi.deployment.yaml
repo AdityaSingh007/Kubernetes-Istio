@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gateway-api
+    app_gateway_auth_policy: enabled
+  name: gateway-api
+  namespace: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: gateway-api
+        app_gateway_auth_policy: enabled
+    spec:
+      serviceAccountName: gatewayapi-sa
+      containers:
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+            - name: ASPNETCORE_URLS
+              value: http://*:8080/
+          image: gatewayapi:istio
+          name: gateway-api
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gateway-api
+  name: gatewayapi-svc
+  namespace: backend
+spec:
+  type: ClusterIP
+  ports:
+    - name: "gateway-api-http"
+      port: 8080 # Port exposed by the service within the cluster
+      targetPort: 8080 # Port on which the gateway API container listens
+  selector:
+    app: gateway-api

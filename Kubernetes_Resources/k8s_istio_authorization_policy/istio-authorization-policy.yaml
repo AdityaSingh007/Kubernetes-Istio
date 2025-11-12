@@ -1,0 +1,39 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: backend-authorization-policy
+  namespace: backend
+spec:
+  selector:
+    matchLabels:
+      app_pod_auth_policy: enabled
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/backend/sa/gatewayapi-sa"]
+      to:
+        - operation:
+            methods: ["GET"]
+        - operation:
+            methods: ["POST"]
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: backend-gateway-api-authorization-policy
+  namespace: backend
+spec:
+  selector:
+    matchLabels:
+      app_gateway_auth_policy: enabled
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/default/sa/istio-demo-gateway-istio"]
+      to:
+        - operation:
+            methods: ["GET"]
+        - operation:
+            methods: ["POST"]

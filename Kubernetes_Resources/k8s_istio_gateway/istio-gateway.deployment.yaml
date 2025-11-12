@@ -1,0 +1,14 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: istio-demo-gateway
+  namespace: default
+spec:
+  gatewayClassName: istio
+  listeners:
+    - name: istio-demo
+      port: 80
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: All

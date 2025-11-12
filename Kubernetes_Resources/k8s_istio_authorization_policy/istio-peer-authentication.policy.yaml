@@ -1,0 +1,8 @@
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: backend-peer-authentication
+  namespace: backend
+spec:
+  mtls:
+    mode: STRICT

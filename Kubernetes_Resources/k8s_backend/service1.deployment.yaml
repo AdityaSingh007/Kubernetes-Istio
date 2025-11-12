@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: service1
+    app_pod_auth_policy: enabled
+  name: service1
+  namespace: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: service1
+        app_pod_auth_policy: enabled
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+            - name: ASPNETCORE_URLS
+              value: http://*:8080/
+          image: service1:istio
+          name: service1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: service1
+  name: ms1
+  namespace: backend
+spec:
+  type: ClusterIP
+  ports:
+    - name: "service1-http"
+      port: 8080 # Port exposed by the service within the cluster
+      targetPort: 8080 # Port on which the service1 container listens
+  selector:
+    app: service1

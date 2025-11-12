@@ -14,9 +14,6 @@ EXPOSE 8080
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
-COPY Rsrc/zscaler_root_CA.pem /usr/local/share/ca-certificates/
-RUN chmod 644 /usr/local/share/ca-certificates/zscaler_root_CA.pem && update-ca-certificates
-ENV SSL_CERT_FILE=/usr/local/share/ca-certificates/zscaler_root_CA.pem
 WORKDIR /src
 COPY ["Service2.csproj", "."]
 RUN dotnet restore "./Service2.csproj"

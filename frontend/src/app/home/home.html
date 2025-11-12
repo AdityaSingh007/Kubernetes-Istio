@@ -1,0 +1,67 @@
+<div
+  style="
+    border: 3px solid black;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: center;
+  "
+>
+  <h2>Demo - Kubernetes Istio gateway && service mesh security</h2>
+  <br />
+</div>
+<div
+  style="
+    border: 3px solid blueviolet;
+    margin-top: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: center;
+  "
+>
+  <mat-grid-list cols="2" rowHeight="5:1">
+    <mat-grid-tile>
+      <button matButton="elevated" (click)="callService1()">
+        Service1
+      </button></mat-grid-tile
+    >
+    <mat-grid-tile>
+      <button matButton="elevated" (click)="callService2()">
+        Service2
+      </button></mat-grid-tile
+    >
+    <mat-grid-tile
+      ><mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Service1 - Response</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{service1Response}}</p>
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-chip-set style="margin: 10px">
+            <mat-chip>pod:service1</mat-chip>
+            <mat-chip>ns:backend</mat-chip>
+            <mat-chip>route:localhost/api/service1/guid</mat-chip>
+          </mat-chip-set>
+        </mat-card-footer>
+      </mat-card></mat-grid-tile
+    >
+    <mat-grid-tile
+      ><mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Service2 - Response</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{service2Response}}</p>
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-chip-set style="margin: 10px">
+            <mat-chip>pod:service2</mat-chip>
+            <mat-chip>ns:backend</mat-chip>
+            <mat-chip>route:localhost/api/service2/guid</mat-chip>
+          </mat-chip-set>
+        </mat-card-footer>
+      </mat-card></mat-grid-tile
+    >
+  </mat-grid-list>
+</div>

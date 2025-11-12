@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ import { Subscription } from 'rxjs';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    JsonPipe,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',

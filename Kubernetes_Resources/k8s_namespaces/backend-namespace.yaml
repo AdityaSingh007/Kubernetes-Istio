@@ -4,4 +4,4 @@ metadata:
   name: backend
   labels:
     environment: Production
-    istio-injection: enabled
+    #istio-injection: enabled

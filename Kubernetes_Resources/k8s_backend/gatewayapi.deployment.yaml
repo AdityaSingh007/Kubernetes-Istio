@@ -19,6 +19,15 @@ spec:
         app: gateway-api
         app_gateway_auth_policy: enabled
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: for
+                    operator: In
+                    values:
+                      - backend
       serviceAccountName: gatewayapi-sa
       containers:
         - env:

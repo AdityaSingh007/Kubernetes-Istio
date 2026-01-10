@@ -17,6 +17,15 @@ spec:
       labels:
         app: frontend-ui
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: for
+                    operator: In
+                    values:
+                      - ui
       containers:
         - name: frontend-ui
           image: frontend:istio

@@ -19,6 +19,15 @@ spec:
         app: service2
         app_pod_auth_policy: enabled
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: for
+                    operator: In
+                    values:
+                      - backend
       containers:
         - env:
             - name: ASPNETCORE_ENVIRONMENT

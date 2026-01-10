@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-options
+  namespace: app-infrastructure
+data:
+  # The "deployment" key contains a YAML snippet for the controller's Deployment spec
+  deployment: |
+    spec:
+      template:
+        spec:
+          nodeSelector:
+            for:backend
+          tolerations:
+          # Optionally add tolerations if the node has taints
+          # - key: "key"
+          #   operator: "Equal"
+          #   value: "value"
+          #   effect: "NoSchedule"

@@ -2,11 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: http-route-gatewayapi
-  namespace: backend
+  namespace: app-infrastructure
 spec:
   parentRefs:
     - name: istio-demo-gateway
-      namespace: default
+      namespace: app-infrastructure
   hostnames: ["localhost"]
   rules:
     - matches:
@@ -32,11 +32,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: http-route-frontend-ui
-  namespace: frontend
+  namespace: app-infrastructure
 spec:
   parentRefs:
     - name: istio-demo-gateway
-      namespace: default
+      namespace: app-infrastructure
   hostnames: ["localhost"]
   rules:
     - matches:
@@ -59,11 +59,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: http-route-frontend-default
-  namespace: frontend
+  namespace: app-infrastructure
 spec:
   parentRefs:
     - name: istio-demo-gateway
-      namespace: default
+      namespace: app-infrastructure
   hostnames: ["localhost"]
   rules:
     - matches:
@@ -80,11 +80,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: http-route-kiali-dashboard
-  namespace: istio-system
+  namespace: app-infrastructure
 spec:
   parentRefs:
     - name: istio-demo-gateway
-      namespace: default
+      namespace: app-infrastructure
   hostnames: ["localhost"]
   rules:
     - matches:
@@ -101,11 +101,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: http-route-prometheus-dashboard
-  namespace: istio-system
+  namespace: app-infrastructure
 spec:
   parentRefs:
     - name: istio-demo-gateway
-      namespace: default
+      namespace: app-infrastructure
   hostnames: ["localhost"]
   rules:
     - matches:

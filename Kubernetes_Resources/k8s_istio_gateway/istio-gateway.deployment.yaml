@@ -2,9 +2,14 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: istio-demo-gateway
-  namespace: default
+  namespace: app-infrastructure
 spec:
   gatewayClassName: istio
+  # infrastructure:
+  #   parametersRef:
+  #     group: ""
+  #     kind: ConfigMap
+  #     name: gateway-options
   listeners:
     - name: istio-demo
       port: 80

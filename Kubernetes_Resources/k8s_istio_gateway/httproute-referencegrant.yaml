@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: allow-route-from-frontend
+  namespace: frontend # This is the Service's namespace
+spec:
+  from:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: app-infrastructure # This is the HTTPRoute's namespace
+  to:
+    - group: "" # Refers to core API group
+      kind: Service
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: allow-route-from-backend
+  namespace: backend # This is the Service's namespace
+spec:
+  from:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: app-infrastructure # This is the HTTPRoute's namespace
+  to:
+    - group: "" # Refers to core API group
+      kind: Service
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: allow-route-from-istio-system
+  namespace: istio-system # This is the Service's namespace
+spec:
+  from:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: app-infrastructure # This is the HTTPRoute's namespace
+  to:
+    - group: "" # Refers to core API group
+      kind: Service

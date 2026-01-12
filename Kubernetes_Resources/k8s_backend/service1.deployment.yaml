@@ -18,6 +18,7 @@ spec:
       labels:
         app: service1
         app_pod_auth_policy: enabled
+        service1-pdb: enabled
     spec:
       affinity:
         nodeAffinity:

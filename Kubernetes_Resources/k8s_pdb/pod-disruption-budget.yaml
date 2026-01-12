@@ -1,0 +1,22 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: backend-service2-pdb
+  namespace: backend
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      service2-pdb: enabled
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: frontend-ui-pdb
+  namespace: frontend
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      frontend-ui-pdb: enabled

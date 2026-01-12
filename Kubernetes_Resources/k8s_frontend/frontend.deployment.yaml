@@ -16,6 +16,7 @@ spec:
     metadata:
       labels:
         app: frontend-ui
+        frontend-ui-pdb: enabled
     spec:
       affinity:
         nodeAffinity:

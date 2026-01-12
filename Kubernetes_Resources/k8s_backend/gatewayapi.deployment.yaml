@@ -12,12 +12,15 @@ spec:
     matchLabels:
       app: gateway-api
   strategy:
-    type: Recreate
+    type: RollingUpdate # This is the default, but explicitly defining it is good practice
+    rollingUpdate:
+      maxUnavailable: 1 # Can be an absolute number (1) or percentage ('25%')
   template:
     metadata:
       labels:
         app: gateway-api
         app_gateway_auth_policy: enabled
+        gateway-api-pdb: enabled
     spec:
       affinity:
         nodeAffinity:

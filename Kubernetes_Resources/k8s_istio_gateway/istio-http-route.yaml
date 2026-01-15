@@ -7,7 +7,11 @@ spec:
   parentRefs:
     - name: istio-demo-gateway
       namespace: app-infrastructure
-  hostnames: ["localhost"]
+  hostnames:
+    [
+      "localhost",
+      "istio-demo-gateway-istio.app-infrastructure.svc.cluster.local",
+    ]
   rules:
     - matches:
         - path:
@@ -37,7 +41,11 @@ spec:
   parentRefs:
     - name: istio-demo-gateway
       namespace: app-infrastructure
-  hostnames: ["localhost"]
+  hostnames:
+    [
+      "localhost",
+      "istio-demo-gateway-istio.app-infrastructure.svc.cluster.local",
+    ]
   rules:
     - matches:
         - path:
@@ -64,7 +72,11 @@ spec:
   parentRefs:
     - name: istio-demo-gateway
       namespace: app-infrastructure
-  hostnames: ["localhost"]
+  hostnames:
+    [
+      "localhost",
+      "istio-demo-gateway-istio.app-infrastructure.svc.cluster.local",
+    ]
   rules:
     - matches:
         - path:
@@ -85,7 +97,11 @@ spec:
   parentRefs:
     - name: istio-demo-gateway
       namespace: app-infrastructure
-  hostnames: ["localhost"]
+  hostnames:
+    [
+      "localhost",
+      "istio-demo-gateway-istio.app-infrastructure.svc.cluster.local",
+    ]
   rules:
     - matches:
         - path:
@@ -106,7 +122,11 @@ spec:
   parentRefs:
     - name: istio-demo-gateway
       namespace: app-infrastructure
-  hostnames: ["localhost"]
+  hostnames:
+    [
+      "localhost",
+      "istio-demo-gateway-istio.app-infrastructure.svc.cluster.local",
+    ]
   rules:
     - matches:
         - path:

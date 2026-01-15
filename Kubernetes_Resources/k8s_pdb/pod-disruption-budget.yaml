@@ -4,7 +4,7 @@ metadata:
   name: backend-service2-pdb
   namespace: backend
 spec:
-  minAvailable: 2
+  minAvailable: 1
   selector:
     matchLabels:
       service2-pdb: enabled
@@ -16,7 +16,7 @@ metadata:
   name: frontend-ui-pdb
   namespace: frontend
 spec:
-  minAvailable: 2
+  minAvailable: 1
   selector:
     matchLabels:
       frontend-ui-pdb: enabled

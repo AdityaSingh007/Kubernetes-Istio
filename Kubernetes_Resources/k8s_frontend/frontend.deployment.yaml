@@ -33,6 +33,9 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              cpu: 5m
       restartPolicy: Always
 ---
 apiVersion: v1

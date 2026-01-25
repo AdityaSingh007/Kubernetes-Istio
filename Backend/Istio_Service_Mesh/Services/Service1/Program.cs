@@ -1,8 +1,11 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Serilog;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, services, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Configuration.AddJsonFile(
         $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
@@ -35,8 +38,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("MyPolicy");
 
-app.MapGet("/api/Service1/{randomId:guid}", (Guid randomId) =>
+app.UseSerilogRequestLogging();
+
+app.MapGet("/api/Service1/{randomId:guid}", (Guid randomId , ILogger<Program> logger) =>
 {
+    logger.LogWarning("Handling request for Service1 with ID: {RandomId}", randomId);
     return TypedResults.Ok(new { Service = "Service1", Id = randomId, status = HttpStatusCode.OK });
 });
 

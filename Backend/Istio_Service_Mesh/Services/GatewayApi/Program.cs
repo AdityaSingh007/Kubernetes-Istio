@@ -1,5 +1,4 @@
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +7,8 @@ builder.Configuration.AddJsonFile(
         optional: false,
         reloadOnChange: true
      ).AddEnvironmentVariables();
+
+builder.Host.UseSerilog((context, services, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -63,6 +64,8 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseCors("MyPolicy");
+
+app.UseSerilogRequestLogging();
 
 //app.UseHttpsRedirection();
 app.MapReverseProxy();

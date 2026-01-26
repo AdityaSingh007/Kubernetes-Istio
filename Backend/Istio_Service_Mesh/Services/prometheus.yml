@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 15s # Scrape targets every 15 seconds
+
+scrape_configs:
+  - job_name: 'ServiceMesh'
+    static_configs:
+      - targets: ['host.docker.internal:5068','host.docker.internal:5244','host.docker.internal:5026']

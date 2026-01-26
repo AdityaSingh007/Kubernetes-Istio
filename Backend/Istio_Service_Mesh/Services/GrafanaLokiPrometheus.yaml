@@ -7,12 +7,6 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     # volumes:
     #   - ./loki-config/:/etc/loki/
-    # healthcheck:
-    #   test: wget =1 --tries=1 -O- http://localhost:3100/ready
-    #   interval: 60s
-    #   timeout: 10s
-    #   retries: 10
-    #   start_period: 60s
 
   promtail:
     container_name: promtail
@@ -21,12 +15,29 @@ services:
       - "9080:9080"
     volumes:
       - ./promtail-config/config.yaml:/etc/promtail/config.yaml
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      # Mounts the local prometheus.yml config file into the container
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      # Persists the collected metrics data across container restarts
+      - prometheus_data:/prometheus
+    command:
+      # Specifies the configuration file location explicitly
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      # Maps host port 9090 to container port 9090
+      - "9090:9090"
 
   grafana:
     container_name: grafana
     image: grafana/grafana:latest
-    # volumes:
-    #   - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+    volumes:
+      - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
     ports:
       - "3000:3000"
     environment:
@@ -35,3 +46,7 @@ services:
       - gf_auth_anonymous_org_role=admin
     depends_on:
       - loki
+      - prometheus
+
+volumes:
+  prometheus_data: {} # Defines

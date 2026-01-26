@@ -1,0 +1,22 @@
+apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://host.docker.internal:9090 # Replace with your Prometheus server URL
+    isDefault: true
+    version: 1
+    editable: true
+    jsonData:
+      timeout: 60
+      # Add other specific Prometheus configurations here if needed
+
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://host.docker.internal:3100 # Replace with your Loki server URL (Loki uses port 3100 by default)
+    version: 1
+    editable: true
+    jsonData:
+      maxLines: 1000
+      # Add other specific Loki configurations here if needed
